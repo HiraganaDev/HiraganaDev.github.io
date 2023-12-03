@@ -1,0 +1,75 @@
+body {
+    background-color: #000000;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.center-text {
+    text-align: center;
+}
+
+/* Définissez la couleur du texte sélectionné (sélection) */
+::selection {
+    background-color: #ffffff;
+    color: #000000; /* Définissez la couleur du texte sélectionné */
+}
+
+.vhs-font {
+    font-family: 'VCR OSD Mono', monospace;
+    letter-spacing: 2px;
+}
+
+#underscore {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+#hiracrack-header {
+    display: inline-block;
+}
+
+.description-section {
+    margin-top: 2em;
+    opacity: 0;
+    animation: slideIn 1s forwards;
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.description-box {
+    background-color: #1a1a1a;
+    border: 2px solid #ffffff;
+    padding: 1.5em;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    transition: transform 0.3s ease-in-out;
+}
+
+.description-box:hover {
+    transform: scale(1.1);
+}
+
+#user-description {
+    margin: 0;
+}
+
+.roboto-font {
+    font-family: 'Roboto', sans-serif;
+}
