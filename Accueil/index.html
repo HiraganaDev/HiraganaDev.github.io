@@ -6,6 +6,10 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
+    <div id="clicks-and-downloads" style="position: absolute; top: 0; left: 0;">
+        <div id="clicks">Clique: 512</div>
+        <div id="downloads">Téléchargement: 381</div>
+    </div>
     <div class="checkboxes">
         <label>
             <input id="game-checkbox" type="checkbox">
@@ -26,6 +30,8 @@
         <div id="error" style="display: none; color: red;"></div>
         <div id="results"></div>
     </div>
+</body>
+</html>
 
 
     <script>
@@ -36,7 +42,9 @@
             { name: "Film 2", genre: "Film", image: "chemin/vers/image4.jpg", url: "chemin/vers/page4.html" },
             { name: "Adobe Photoshop 2023 v24.5.0.500 Win x64", genre: "Application", image: "/img/photoshop_2023.png", url: "/download/photoshop_2023.html" },
             { name: "CCleaner Professional Business Technician v5.38.6357", genre: "Application", image: "/img/ccleaner_pro.png", url: "/download/ccleaner_pro.html" },
-            { name: "Kaspersky Anti-Virus 2017 17.0.0.611 (b) Final", genre: "Application", image: "/img/kaspersky.png", url: "/download/kaspersky.html"}
+            { name: "Kaspersky Anti-Virus 2017 17.0.0.611 (b) Final", genre: "Application", image: "/img/kaspersky.png", url: "/download/kaspersky.html"},
+            { name: "Adobe After Effects 2023 23.3.0.53", genre: "Application", image: "/img/aftereffect_2023.png", url: "/download/aftereffect_2023.html"},
+            { name: "AfterCodecs v1.6.0 pour Adobe AE - PR - ME", genre: "Application", image: "/img/aftercodecs.png", url: "/download/aftercodecs.html"}
         ];
     
         // Triez les données par ordre alphabétique
