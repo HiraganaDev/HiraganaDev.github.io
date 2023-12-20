@@ -1,14 +1,113 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>HiraCrack (Soon)</title>
+    <title>HiraCrack - Home</title>
+    <link rel="icon" type="image/x-icon" href="/other/logo.jpg">
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1 class="glitch">HiraCrack (Soon)</h1>
+    <div class="checkboxes">
+        <label>
+            <input id="game-checkbox" type="checkbox">
+            Jeu
+        </label>
+        <label>
+            <input id="movie-checkbox" type="checkbox">
+            Film
+        </label>
+        <label>
+            <input id="app-checkbox" type="checkbox">
+            Application
+        </label>
     </div>
+    <div class="search-bar">
+        <input id="search-input" type="text" placeholder="Recherche Pirate">
+        <div id="loading" style="display: none;">Chargement...</div>
+        <div id="error" style="display: none; color: red;"></div>
+        <div id="results"></div>
+    </div>
+
+
+    <script>
+        var data = [
+            { name: "Jeu 1", genre: "Jeu", image: "chemin/vers/image1.jpg", url: "chemin/vers/page1.html" },
+            { name: "Jeu 2", genre: "Jeu", image: "chemin/vers/image2.jpg", url: "chemin/vers/page2.html" },
+            { name: "Film 1", genre: "Film", image: "chemin/vers/image3.jpg", url: "chemin/vers/page3.html" },
+            { name: "Film 2", genre: "Film", image: "chemin/vers/image4.jpg", url: "chemin/vers/page4.html" },
+            { name: "Adobe Photoshop 2023 v24.5.0.500 Win x64", genre: "Application", image: "/img/photoshop_2023.png", url: "/download/photoshop_2023.html" },
+            { name: "CCleaner Professional Business Technician v5.38.6357", genre: "Application", image: "/img/ccleaner_pro.png", url: "/download/ccleaner_pro.html" },
+            { name: "Kaspersky Anti-Virus 2017 17.0.0.611 (b) Final", genre: "Application", image: "/img/kaspersky.png", url: "/download/kaspersky.html"}
+        ];
+    
+        // Triez les données par ordre alphabétique
+        data.sort(function(a, b) {
+        var nameA = a.name.toUpperCase(); // ignorez la casse
+        var nameB = b.name.toUpperCase(); // ignorez la casse
+        if (nameA < nameB) {
+            return -1;
+        }
+        if (nameA > nameB) {
+            return 1;
+        }
+        return 0; // les noms sont égaux
+    });
+
+    document.getElementById('search-input').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            var searchQuery = e.target.value.toLowerCase();
+            var isGameChecked = document.getElementById('game-checkbox').checked;
+            var isMovieChecked = document.getElementById('movie-checkbox').checked;
+            var isAppChecked = document.getElementById('app-checkbox').checked;
+
+            // Afficher l'indicateur de chargement
+            document.getElementById('loading').style.display = 'block';
+
+            setTimeout(function() {
+                // Cacher l'indicateur de chargement
+                document.getElementById('loading').style.display = 'none';
+
+                var filteredData = data.filter(function(item) {
+                    if (isGameChecked && item.genre !== 'Jeu') {
+                        return false;
+                    }
+                    if (isMovieChecked && item.genre !== 'Film') {
+                        return false;
+                    }
+                    if (isAppChecked && item.genre !== 'Application') {
+                        return false;
+                    }
+                    return searchQuery.trim() === '' || item.name.toLowerCase().includes(searchQuery);
+                });
+
+                // Triez les données filtrées par ordre alphabétique
+                filteredData.sort(function(a, b) {
+                    var nameA = a.name.toUpperCase(); // ignorez la casse
+                    var nameB = b.name.toUpperCase(); // ignorez la casse
+                    if (nameA < nameB) {
+                        return -1;
+                    }
+                    if (nameA > nameB) {
+                        return 1;
+                    }
+                    return 0; // les noms sont égaux
+                });
+
+                if (filteredData.length === 0) {
+                    // Afficher le message d'erreur si aucun résultat n'a été trouvé
+                    document.getElementById('error').innerHTML = 'Ce que vous cherchez n\'est pas disponible.';
+                    document.getElementById('error').style.display = 'block';
+                    document.getElementById('results').innerHTML = '';
+                } else {
+                    // Cacher le message d'erreur
+                    document.getElementById('error').style.display = 'none';
+
+                    document.getElementById('results').innerHTML = filteredData.map(function(item) {
+                        return '<div style="text-align: center;"><a href="' + item.url + '"><img src="' + item.image + '" alt="' + item.name + '" style="width: 200px; height: 200px;"></a><br>' + item.name + '</div>';
+                    }).join('<br>');
+                }
+            }, 2000); // Simuler un délai de chargement de 2 secondes
+        }
+    });
+</script>
 </body>
 </html>
